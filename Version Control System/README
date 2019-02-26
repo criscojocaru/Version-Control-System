@@ -1,0 +1,45 @@
+
+  ===============================================
+   Nume	:	Cojocaru Cristina-Gabriela
+  ===============================================
+ 
+  ===== VERSION CONTROL SYSTEM =====
+  
+  Clasa Main este folosita drept entry point in tema.
+  Va primi in linia de comanda fisiere de intrare/iesire.
+
+  IDGenerator este folosit pentru a genera id-uri unice pentru fisiere,
+  directoare si commituri.
+  Checkerul testeaza id-urile commiturilor.
+
+  OperationParser are rolul de a parsa o linie fisierul de intrare si de a chema
+  OperationFactory pentru a crea operatiile specifice.
+
+  Toate mesajele de eroare necesare acestei aplicatii sunt definite in ErrorCodeManager.
+
+  Clasa Vcs contine un activeSnapshot. El este, de fapt, instanta curenta de
+  filesystem pe care se ruleaza comenzile de filesystem. Aceasta poate fi
+  schimbata in momentul in care dam rollback sau dam checkout.
+  
+  Pentru implementarea VCS am creat urmatoarele clase:
+  
+  - Commit care contine un activeSnapshot (instanta curenta de filesystem), un
+  id generat automat si un mesaj (String-ul primit ca argument la comanda 
+  commit)
+  - Branch care contine un ArrayList de Commit-uri si un nume
+  - In clasa Vcs din schelet am adaugat un ArrayList de Branch-uri, am
+  initializat master branch cu primul commit reprezentat de Snapshot-ul 
+  sistemului de fisiere de la inceput, am adaugat un ArrayList de String-uri ce
+  reprezinta staged changes, am adaugat un branch curent 
+  - BranchOperation creeaza un nou branch care contine un commit cu sistemul
+  de fisiere al commit-ului curent
+  - CommitOperation creeaza un nou commit si goleste staged changes
+  - StatusOperation afisaza branch-ul curent si staged changes
+  - CheckoutOperation cu ajutorul careia ne putem muta pe un anumit commit
+  pentru a reveni la o versiune anterioara a sistemului de fisiere sau
+  pe un anumit branch
+  - LogOperation afisaza toate commit-urile de pe branch-ul curent impreuna cu
+  mesajele acestora
+  - RollbackOperation cu ajutorul careia se sterg staged changes si revenim la
+  versiunea sistemului de fisiere a commit-ului curent
+  
